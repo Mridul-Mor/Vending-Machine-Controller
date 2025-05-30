@@ -2,13 +2,10 @@
 
 module vending_machine_tb;
 
-    // Inputs
     reg clk, reset, coin_1, coin_2;
 
-    // Outputs
     wire item_dispensed, change;
 
-    // Instantiate the Unit Under Test (UUT)
     vending_machine uut (
         .clk(clk),
         .reset(reset),
@@ -18,7 +15,6 @@ module vending_machine_tb;
         .change(change)
     );
 
-    // Clock generation (period = 10ns)
     always #5 clk = ~clk;
 
     initial begin
@@ -28,7 +24,6 @@ module vending_machine_tb;
         coin_1 = 0;
         coin_2 = 0;
 
-        // Hold reset for a few clock cycles
         #15 reset = 0;
 
         // Scenario 1: Insert ₹2, ₹1, ₹2 (Total ₹5)
@@ -39,7 +34,6 @@ module vending_machine_tb;
         #20; // Observe item_dispensed and change
         $display("Scenario 1 done.");
 
-        // Reset before next scenario
         reset_machine();
 
         // Scenario 2: Insert ₹1 five times (Total ₹5)
